@@ -1,4 +1,5 @@
-import { UpdatePostForm } from "../../components/UpdatePostForm";
+import { UpdatePostForm } from "@/components/UpdatePostForm";
+import { RemovePostButton } from "@/components/RemovePostButton";
 
 async function getData(id: string) {
   const res = await fetch(`http://localhost:4000/posts/${id}`);
@@ -6,8 +7,26 @@ async function getData(id: string) {
   return posts;
 }
 
+// async function removeData(id: string) {
+//   try {
+//     const response = await fetch(`http://localhost:4000/posts/${id}`, {
+//       method: "DELETE",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     });
+//     if (!response.ok) {
+//       throw new Error("Something went wrong");
+//     }
+//     const post = await response.json();
+//     console.log("削除しました");
+//     // 成功した場合の処理（例えば、投稿リストを更新するなど）
+//   } catch (error) {
+//     console.error("Error creating a post:", error);
+//   }
+// }
+
 const Post = ({ post }: { post: any }) => {
-  console.log(post);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
@@ -30,6 +49,7 @@ export default async function Home({ params }: { params: { id: string } }) {
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <UpdatePostForm id={params.id} post={data} />
       <Post post={data} />
+      <RemovePostButton id={params.id} />
     </main>
   );
 }
