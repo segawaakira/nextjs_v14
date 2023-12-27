@@ -13,7 +13,7 @@ const Posts = ({ posts }: { posts: any[] }) => {
       <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
         {posts.map((post: any) => (
           <a
-            href={`/posts/${post.id}`}
+            href={`/${post.id}`}
             className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"
             key={post.id}
           >

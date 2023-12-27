@@ -6,7 +6,7 @@ export const UpdatePostForm = ({ id, post }: { id: string; post: any }) => {
   const [title, setTitle] = useState(post?.title);
   const [author, setAuthor] = useState(post?.author);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     const newPost = { title, author };
 
@@ -22,6 +22,8 @@ export const UpdatePostForm = ({ id, post }: { id: string; post: any }) => {
         throw new Error("Something went wrong");
       }
       const post = await response.json();
+      setTitle(post.title);
+      setAuthor(post.author);
       // 成功した場合の処理（例えば、投稿リストを更新するなど）
     } catch (error) {
       console.error("Error creating a post:", error);
