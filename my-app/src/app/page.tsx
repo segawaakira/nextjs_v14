@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { CreatePostForm } from "../components/CreatePostForm";
 
 async function getData() {
