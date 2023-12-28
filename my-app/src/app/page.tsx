@@ -1,5 +1,6 @@
 import { Suspense, use } from "react";
-import { CreatePostForm } from "../components/CreatePostForm";
+import { CreatePostForm } from "@/components/CreatePostForm";
+import { Post } from "@/interfaces/post";
 
 const Posts = async () => {
   const res = await fetch("http://localhost:4000/posts");
@@ -9,7 +10,7 @@ const Posts = async () => {
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <h1 className="text-5xl font-bold">Posts</h1>
       <div className="flex flex-wrap items-center justify-around max-w-4xl mt-6 sm:w-full">
-        {posts.map((post: any) => (
+        {posts.map((post: Post) => (
           <a
             href={`/${post.id}`}
             className="p-6 mt-6 text-left border w-96 rounded-xl hover:text-blue-600 focus:text-blue-600"

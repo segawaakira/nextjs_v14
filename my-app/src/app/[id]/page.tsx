@@ -11,7 +11,7 @@ export default async function Home({ params }: { params: { id: string } }) {
   const data = await getData(params.id);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <UpdatePostForm id={params.id} post={data} />
+      <UpdatePostForm post={data} />
       <RemovePostButton id={params.id} />
     </main>
   );
