@@ -1,12 +1,10 @@
+import { Suspense, use } from "react";
 import { CreatePostForm } from "../components/CreatePostForm";
 
-async function getData() {
+const Posts = async () => {
   const res = await fetch("http://localhost:4000/posts");
   const posts = await res.json();
-  return posts;
-}
-
-const Posts = ({ posts }: { posts: any[] }) => {
+  await delay(1);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <h1 className="text-5xl font-bold">Posts</h1>
@@ -26,12 +24,19 @@ const Posts = ({ posts }: { posts: any[] }) => {
   );
 };
 
+function delay(n: number) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, n * 1000);
+  });
+}
+
 export default async function Home() {
-  const data = await getData();
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <CreatePostForm />
-      <Posts posts={data} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <Posts />
+      </Suspense>
     </main>
   );
 }
