@@ -1,18 +1,31 @@
+import { Suspense, use } from "react";
 import { UpdatePostForm } from "@/components/UpdatePostForm";
 import { RemovePostButton } from "@/components/RemovePostButton";
 
-async function getData(id: string) {
-  const res = await fetch(`http://localhost:4000/posts/${id}`);
-  const posts = await res.json();
-  return posts;
+function delay(n: number) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, n * 1000);
+  });
 }
 
+const Form = async ({ id }: { id: string }) => {
+  const res = await fetch(`http://localhost:4000/posts/${id}`);
+  const post = await res.json();
+  await delay(1);
+  return (
+    <>
+      <UpdatePostForm post={post} />
+      <RemovePostButton id={id} />
+    </>
+  );
+};
+
 export default async function Home({ params }: { params: { id: string } }) {
-  const data = await getData(params.id);
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <UpdatePostForm post={data} />
-      <RemovePostButton id={params.id} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <Form id={params.id} />
+      </Suspense>
     </main>
   );
 }
