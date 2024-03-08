@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form";
 import { Post } from "@/interfaces/post";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { updatePost } from "@/app/lib/actions";
 
 export const UpdatePostForm = ({ post }: { post: Post }) => {
   const {
@@ -40,7 +41,9 @@ export const UpdatePostForm = ({ post }: { post: Post }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    // <form onSubmit={handleSubmit(onSubmit)}>
+    <form action={updatePost}>
+      <input type="hidden" {...register("id")} />
       <input type="text" {...register("title")} placeholder="Title" />
       {errors.title && <p>{errors.title.message}</p>}
 
