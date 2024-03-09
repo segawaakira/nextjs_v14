@@ -55,7 +55,7 @@ export async function updatePost(formData: FormData) {
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
-    revalidatePath("/[id]");
+    revalidatePath("/[id]", "page");
   } catch (error) {
     console.error("Error creating a post:", error);
   }
