@@ -2,18 +2,11 @@ import { Suspense, use } from "react";
 import { UpdatePostForm } from "@/components/UpdatePostForm";
 import { RemovePostButton } from "@/components/RemovePostButton";
 
-function delay(n: number) {
-  return new Promise(function (resolve) {
-    setTimeout(resolve, n * 1000);
-  });
-}
-
 const Form = async ({ id }: { id: string }) => {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/posts${id}`
+    `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/posts/${id}`
   );
   const post = await res.json();
-  await delay(1);
   return (
     <>
       <UpdatePostForm post={post} />

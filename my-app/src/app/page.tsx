@@ -11,7 +11,6 @@ import {
 const Posts = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/posts`);
   const posts = await res.json();
-  await delay(1);
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2">
       <Select>
@@ -43,12 +42,6 @@ const Posts = async () => {
     </div>
   );
 };
-
-function delay(n: number) {
-  return new Promise(function (resolve) {
-    setTimeout(resolve, n * 1000);
-  });
-}
 
 export default async function Home() {
   return (
