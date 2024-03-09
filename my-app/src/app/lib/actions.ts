@@ -1,5 +1,6 @@
 "use server";
 import { NewPost, Post } from "@/interfaces/post";
+import { revalidatePath } from "next/cache";
 
 export async function createPost(formData: FormData) {
   const { title, author } = NewPost.parse({
@@ -54,6 +55,7 @@ export async function updatePost(formData: FormData) {
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
+    revalidatePath("/[id]");
   } catch (error) {
     console.error("Error creating a post:", error);
   }

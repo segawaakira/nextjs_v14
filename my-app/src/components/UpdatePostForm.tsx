@@ -21,31 +21,20 @@ export const UpdatePostForm = ({ post }: { post: Post }) => {
   });
 
   const onSubmit = async (data: any) => {
+    const formData = new FormData();
+    formData.append("id", data.id);
+    formData.append("title", data.title);
+    formData.append("author", data.author);
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/posts/${data.id}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Something went wrong");
-      }
-      const updatedPost = await response.json();
-      reset(updatedPost); // Reset form with new data
-      // Additional success handling
+      await updatePost(formData);
     } catch (error) {
       console.error("Error updating the post:", error);
     }
   };
 
   return (
-    // <form onSubmit={handleSubmit(onSubmit)}>
-    <form action={updatePost}>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      {/* <form action={updatePost}> */}
       <input type="hidden" {...register("id")} />
       <input type="text" {...register("title")} placeholder="Title" />
       {errors.title && <p>{errors.title.message}</p>}
