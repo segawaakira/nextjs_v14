@@ -9,7 +9,9 @@ function delay(n: number) {
 }
 
 const Form = async ({ id }: { id: string }) => {
-  const res = await fetch(`http://localhost:4000/posts/${id}`);
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/posts${id}`
+  );
   const post = await res.json();
   await delay(1);
   return (

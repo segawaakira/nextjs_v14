@@ -6,12 +6,15 @@ import { Button } from "@/components/ui/button";
 export const RemovePostButton = ({ id }: { id: string }) => {
   const removeData = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:4000/posts/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/posts/${id}`,
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       if (!response.ok) {
         throw new Error("Something went wrong");
       }

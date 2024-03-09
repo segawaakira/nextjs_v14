@@ -26,7 +26,7 @@ export const CreatePostForm = () => {
   //   const newPost = { title, author };
 
   //   try {
-  //     const response = await fetch("http://localhost:4000/posts", {
+  //     const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/posts`, {
   //       method: "POST",
   //       headers: {
   //         "Content-Type": "application/json",

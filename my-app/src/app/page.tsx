@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 const Posts = async () => {
-  const res = await fetch("http://localhost:4000/posts");
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URL}/posts`);
   const posts = await res.json();
   await delay(1);
   return (
